@@ -59,6 +59,7 @@
     }
 
     .reel {
+      position: relative;
       height: 100vh;
       width: 100vw;
       scroll-snap-align: start;
@@ -75,6 +76,29 @@
       background: black;
     }
 
+    .like-box {
+      position: absolute;
+      right: 20px;
+      bottom: 120px;
+      color: white;
+      text-align: center;
+      z-index: 100;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.8);
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .like-icon {
+      font-size: 38px;
+      line-height: 1;
+    }
+
+    .like-count {
+      margin-top: 4px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
     .end {
       height: 100vh;
       width: 100vw;
@@ -87,6 +111,8 @@
       font-size: 24px;
       text-align: center;
       line-height: 1.8;
+      padding: 30px;
+      box-sizing: border-box;
     }
   </style>
 </head>
@@ -106,16 +132,37 @@
 
   <script>
     const randomVideos = [
-      "video001_選挙管理委員会広報動画.mp4",
-      "フェイク動画01_風間候補による駅員への暴言.mp4",
-      "video07.mp4"
+      {
+        src: "video001_選挙管理委員会広報動画.mp4",
+        likes: "128"
+      },
+      {
+        src: "フェイク動画01_風間候補による駅員への暴言.mp4",
+        likes: "1.4K"
+      },
+      {
+        src: "video07.mp4",
+        likes: "2.3K"
+      }
     ];
 
     const sequenceVideos = [
-      "フェイク動画_真相ハンターＫ01.mp4",
-      "video006.mp4",
-      "video007.mp4",
-      "video008.mp4"
+      {
+        src: "フェイク動画_真相ハンターＫ01.mp4",
+        likes: "3.8K"
+      },
+      {
+        src: "video006.mp4",
+        likes: "2.1K"
+      },
+      {
+        src: "video007.mp4",
+        likes: "4.6K"
+      },
+      {
+        src: "video008.mp4",
+        likes: "5.2K"
+      }
     ];
 
     // 通常動画をランダムに並び替える
@@ -139,19 +186,26 @@
 
     const reels = document.getElementById("reels");
 
-    videos.forEach((url) => {
+    videos.forEach((item) => {
       const section = document.createElement("section");
       section.className = "reel";
 
       const video = document.createElement("video");
-      video.src = url;
+      video.src = item.src;
       video.controls = true;
       video.playsInline = true;
       video.muted = false;
       video.volume = 1.0;
       video.preload = "metadata";
 
+      const likeBox = document.createElement("div");
+      likeBox.className = "like-box";
+      likeBox.innerHTML =
+        '<div class="like-icon">♡</div>' +
+        '<div class="like-count">' + item.likes + '</div>';
+
       section.appendChild(video);
+      section.appendChild(likeBox);
       reels.appendChild(section);
     });
 
