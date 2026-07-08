@@ -120,9 +120,9 @@
 <body>
 
   <div class="top" id="top">
-    <h1>ＳＮＳ動画サイト</h1>
+    <h1>ViewTube</h1>
     <p>
-      ミタニ市長選挙に関連するショート動画を視聴できます。<br>
+      ショート動画を視聴できます。<br>
       音量をあげて上にスワイプしてください。
     </p>
     <button class="start-button" onclick="startVideos()">スタート</button>
@@ -131,65 +131,22 @@
   <div class="reels-container" id="reels"></div>
 
   <script>
-    const randomVideos = [
-      {
-        src: "フェイク動画_風間の闇の公約７選.mp4",
-        likes: "1.4K"
-      },
-      {
-        src: "姫島キャンペーンv2.mp4",
-        likes: "20.3K"
-      },
-      {
-        src: "フェイク動画01_風間候補による駅員への暴言.mp4",
-        likes: "2.3K"
-      }
-    ];
-
     const sequenceVideos = [
       {
         src: "フェイク動画_真相ハンターＫ01.mp4",
         likes: "3.8K"
       },
       {
-        src: "神崎カオルキャンペーン動画①v2.mp4",
-        likes: "20.3K"
-      },
-      {
-        src: "神崎カオルキャンペーン動画②v2.mp4",
-        likes: "20.3K"
-      },
-      {
         src: "フェイク動画_真相ハンターＫ02.mp4",
         likes: "5.1K"
       },
-      {
-        src: "山本教授の動画01.mp4",
-        likes: "225"
-      },
-      {
         src: "フェイク動画_真相ハンターＫ03.mp4",
         likes: "4.6K"
       },
-      {
-        src: "山本教授の動画02.mp4",
-        likes: "121"
-      },
-      {
         src: "フェイク動画_真相ハンターＫ04.mp4",
         likes: "10.2K"
       }
     ];
-
-    // 通常動画をランダムに並び替える
-    for (let i = randomVideos.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [randomVideos[i], randomVideos[j]] = [randomVideos[j], randomVideos[i]];
-    }
-
-    // 順序維持動画を、順番を保ったままランダムな位置に挿入する
-    let videos = [...randomVideos];
-    let previousIndex = -1;
 
     sequenceVideos.forEach(video => {
       const minPos = previousIndex + 1;
