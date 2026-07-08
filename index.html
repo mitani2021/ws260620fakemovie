@@ -131,7 +131,7 @@
   <div class="reels-container" id="reels"></div>
 
   <script>
-    const sequenceVideos = [
+    const videos = [
       {
         src: "フェイク動画_真相ハンターＫ01.mp4",
         likes: "3.8K"
@@ -140,22 +140,15 @@
         src: "フェイク動画_真相ハンターＫ02.mp4",
         likes: "5.1K"
       },
+      {
         src: "フェイク動画_真相ハンターＫ03.mp4",
         likes: "4.6K"
       },
+      {
         src: "フェイク動画_真相ハンターＫ04.mp4",
         likes: "10.2K"
       }
     ];
-
-    sequenceVideos.forEach(video => {
-      const minPos = previousIndex + 1;
-      const maxPos = videos.length;
-      const insertPos = Math.floor(Math.random() * (maxPos - minPos + 1)) + minPos;
-
-      videos.splice(insertPos, 0, video);
-      previousIndex = insertPos;
-    });
 
     const reels = document.getElementById("reels");
 
@@ -187,14 +180,6 @@
     end.innerHTML = "もう一度、ご覧になる場合はスワイプしてください。";
     reels.appendChild(end);
 
-    function startVideos() {
-      document.getElementById("top").style.display = "none";
-      reels.style.display = "block";
-
-      const firstVideo = document.querySelector("video");
-      firstVideo.play().catch(() => {});
-    }
-
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         const video = entry.target.querySelector("video");
@@ -214,6 +199,16 @@
     document.querySelectorAll(".reel").forEach(reel => {
       observer.observe(reel);
     });
+
+    function startVideos() {
+      document.getElementById("top").style.display = "none";
+      reels.style.display = "block";
+
+      const firstVideo = document.querySelector("video");
+      if (firstVideo) {
+        firstVideo.play().catch(() => {});
+      }
+    }
   </script>
 
 </body>
